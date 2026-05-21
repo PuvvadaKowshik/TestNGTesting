@@ -2,20 +2,20 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'
-        jdk 'JDK'
+        maven 'MAVEN3'
+        jdk 'JDK17'
     }
 
     stages {
 
-        stage('Clone') {
+        stage('Clone Repository') {
             steps {
                 git branch: 'main',
                 url: 'https://github.com/PuvvadaKowshik/TestNGTesting.git'
             }
         }
 
-        stage('Run TestNG') {
+        stage('Build and Run TestNG') {
             steps {
                 bat 'mvn clean test'
             }
@@ -25,9 +25,14 @@ pipeline {
     post {
         always {
             emailext(
-                subject: "Test Report - ${currentBuild.currentResult}",
-                body: "Build Status: ${currentBuild.currentResult}",
-                to: 'yourmail@gmail.com',
+                subject: "TestNG Report - ${currentBuild.currentResult}",
+                body: """
+                Build Status: ${currentBuild.currentResult}
+
+                Project: ${env.JOB_NAME}
+                Build Number: ${env.BUILD_NUMBER}
+                """,
+                to: 'YOUR_MAIL@gmail.com',
                 attachmentsPattern: '**/emailable-report.html'
             )
         }
