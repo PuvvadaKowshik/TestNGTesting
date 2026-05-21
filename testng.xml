@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo Complete Test Suite">
+    
+    <listeners>
+        <listener class-name="com.vit.TestingwithNg.listeners.ExtentReportListener"/>
+        <listener class-name="com.vit.TestingwithNg.listeners.TestListener"/>
+    </listeners>
+    
+    <test name="All Tests">
+        <classes>
+            <class name="com.vit.TestingwithNg.tests.LoginTest"/>
+            <class name="com.vit.TestingwithNg.tests.ProductTest"/>
+            <class name="com.vit.TestingwithNg.tests.CartTest"/>
+            <class name="com.vit.TestingwithNg.tests.CheckoutTest"/>
+        </classes>
+    </test>
+    
+</suite>
